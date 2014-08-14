@@ -8,6 +8,7 @@
 			<column name="person_id" autoIncrement="true" type="int">
 				<constraints primaryKey="true"></constraints>
 			</column>
+			<column name="person_name" type="varchar(75)"/>
 		</createTable>
 	</changeSet>
 
