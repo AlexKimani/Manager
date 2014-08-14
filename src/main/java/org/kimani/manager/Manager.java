@@ -9,22 +9,20 @@ import java.io.PrintWriter;
 
 /**
  * Hello world!
- *
  */
-public class Manager extends HttpServlet
-{
+public class Manager extends HttpServlet {
 	private String message;
 
-	public void init() throws ServletException{
+	public void init() throws ServletException {
 		message = "Hello Kimani";
 	}
 
-	public void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 
-		PrintWriter out= response.getWriter();
+		PrintWriter out = response.getWriter();
 		out.println("<h1>" + message + "</h1>");
-}
+	}
 
 	public void destroy() {
 
