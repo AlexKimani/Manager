@@ -8,7 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-	<title></title>
+	<title>Car Park</title>
+
+	<link href="<c:url value=resources/css/lib/bootstrap/bootstrap.css" rel="stylesheet">
+	<script src="<c:url value=resources/js/lib/jquery.min.js" ></script>
 </head>
 <body bgcolor=white>
 
@@ -18,7 +21,7 @@
 			<img src="resources/images/main.png">
 		</td>
 		<td>
-			<h1>Sample "Hello, World" Application</h1>
+			<h1>Car park Management Application</h1>
 		</td>
 	</tr>
 </table>
