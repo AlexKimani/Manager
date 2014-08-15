@@ -9,12 +9,12 @@
 *.ear
 
 # eclipse conf file
-.settings
-.classpath
-.project
-.manager
-.scala_dependencies
-.cache
+#.settings
+#.classpath
+#.project
+#.manager
+#.scala_dependencies
+#.cache
 
 # idea conf files
 #.idea
@@ -50,3 +50,8 @@ pom.xml.releaseBackup
 *.DS_Store
 *.swp
 *.out
+
+.idea
+manager.iml
+
+.directory
