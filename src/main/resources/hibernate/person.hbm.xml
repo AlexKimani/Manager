@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+		"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="hibernate">
+	<class name="org.kimani.manager.mapping.Person" table="person">
+		<id name="personId" type="java.lang.Integer">
+			<column name="person_id"/>
+		</id>
+		<property name="personName" type="java.lang.String">
+			<column name="person_name"/>
+		</property>
+	</class>
+
+</hibernate-mapping>
