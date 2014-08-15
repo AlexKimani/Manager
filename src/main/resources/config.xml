@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<module>
+	<id>${project.parent.artifactId}</id>
+	<name>${project.parent.name}</name>
+	<version>${project.parent.version}</version>
+	<package>${project.parent.groupId}.${project.parent.artifactId}</package>
+	<author>Kimani</author>
+	<description>
+		${project.parent.description}
+	</description>
+
+	<mappingFiles>
+
+	</mappingFiles>
+</module>
