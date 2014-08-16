@@ -10,10 +10,20 @@
 <head>
 	<title>Car Park</title>
 
-	<link href="<c:url value=resources/css/lib/bootstrap/bootstrap.css" rel="stylesheet">
-	<script src="<c:url value=resources/js/lib/jquery.min.js" ></script>
+	<link href="resources/css/lib/bootstrap/bootstrap.css" rel="stylesheet">
+	<link href="resources/css/lib/bootstrap/bootstrap.min.css">
+	<script src="resources/js/lib/bootstrap/bootstrap.js"></script>
+	<script src="resources/js/lib/jquery.min.js" ></script>
+
 </head>
 <body bgcolor=white>
+
+<div class="menu">
+	<ul class="navbar nav-tabs nav-justified">
+		<li><a href="index.jsp">Home</a></li>
+		<
+	</ul>
+</div>
 
 <table border="0" cellpadding="10">
 	<tr>

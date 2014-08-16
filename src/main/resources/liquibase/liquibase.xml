@@ -4,12 +4,212 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
 	<changeSet id="manager.person-v1.00.01" author="Joe Alex Kimani">
+		<comment>Added all person related tables.</comment>
 		<createTable tableName="person">
 			<column name="person_id" autoIncrement="true" type="int">
 				<constraints primaryKey="true"></constraints>
 			</column>
-			<column name="person_name" type="varchar(75)"/>
+			<column name="gender" type="varchar(75)"/>
+			<column name="birthdate" type="date"/>
+			<column name="creator" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="date_created" type="datetime">
+				<constraints nullable="false"/>
+			</column>
+			<column name="changed_by" type="int(11)"/>
+			<column name="date_changed" type="datetime"/>
+			<column name="voided" type="tinyint(1)"/>
+			<column name="voided_by" type="int(11)"/>
+			<column name="date_voided" type="datetime"/>
+		</createTable>
+		<createTable tableName="person_address">
+			<column name="person_address_id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="person_id" type="int(11)"/>
+			<column name="address" type="varchar(255)"/>
+			<column name="city_village" type="varchar(255)"/>
+			<column name="state_province" type="varchar(255)"/>
+			<column name="county_district" type="varchar(255)"/>
+			<column name="postal_code" type="varchar(255)"/>
+			<column name="country" type="varchar(255)"/>
+			<column name="creator" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="date_created" type="datetime">
+				<constraints nullable="false"/>
+			</column>
+			<column name="voided" type="tinyint(1)"/>
+			<column name="voided_by" type="int(11)"/>
+			<column name="date_voided" type="datetime"/>
+			<column name="void_reason" type="varchar(255)"/>
+			<column name="changed_by" type="int(11)"/>
+			<column name="date_changed" type="datetime"/>
+		</createTable>
+		<createTable tableName="person_attribute_type">
+			<column name="person_attribute_type_id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="name" type="varchar(255)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="description" type="varchar(255)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="format" type="varchar(50)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="creator" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="date_created" type="datetime">
+				<constraints nullable="false"/>
+			</column>
+			<column name="changed_by" type="int(11)"/>
+			<column name="date_changed" type="datetime"/>
+			<column name="retired" type="tinyint(1)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="retired_by" type="int(11)"/>
+			<column name="date_retired" type="datetime"/>
+			<column name="retire_reason" type="varchar(255)"/>
+			<column name="edit_privilege" type="varchar(255)"/>
+		</createTable>
+		<createTable tableName="person_attribute">
+			<column name="person_attribute_id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="person_id" type="int">
+				<constraints nullable="false"/>
+			</column>
+			<column name="phone_number" type="varchar(50)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="person_attribute_type_id" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="creator" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="date_created" type="datetime">
+				<constraints nullable="false"/>
+			</column>
+			<column name="changed_by" type="int(11)"/>
+			<column name="date_changed" type="datetime"/>
+			<column name="voided" type="tinyint(1)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<createTable tableName="person_name">
+			<column name="person_name_id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="person_id" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="prefix" type="varchar(50)"/>
+			<column name="given_name" type="varchar(50)"/>
+			<column name="middle_name" type="varchar(50)"/>
+			<column name="family_name_prefix" type="varchar(50)"/>
+			<column name="family_name" type="varchar(50)"/>
+			<column name="family_name2" type="varchar(50)"/>
+			<column name="family_name_suffix" type="varchar(50)"/>
+			<column name="creator" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="date_created" type="datetime">
+				<constraints nullable="false"/>
+			</column>
+			<column name="changed_by" type="int(11)"/>
+			<column name="date_changed" type="datetime"/>
 		</createTable>
 	</changeSet>
-
+	<changeSet id="manager.privilige-v1.00.01" author="Joe Alex Kimani">
+		<comment>Tables to handle privileges added.</comment>
+		<createTable tableName="privilege">
+			<column name="privilege" type="varchar(255)">
+				<constraints nullable="false" primaryKey="true"/>
+			</column>
+			<column name="description" type="varchar(255)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet id="manager.user-v1.00.01" author="Joe Alex Kimani">
+		<createTable tableName="users">
+			<column name="user_id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="system_id" type="varchar(50)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="username" type="varchar(128)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="person_id" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="password" type="varchar(128)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="secret_question" type="varchar(255)"/>
+			<column name="secret_answer" type="varchar(255)"/>
+			<column name="creator" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="date_created" type="datetime">
+				<constraints nullable="false"/>
+			</column>
+			<column name="changed_by" type="int(11)"/>
+			<column name="date_changed" type="datetime"/>
+			<column name="retired" type="tinyint(1)"/>
+			<column name="date_retired" type="datetime"/>
+			<column name="retire_reason" type="varchar(255)"/>
+		</createTable>
+		<createTable tableName="user_role">
+			<column name="user_id" type="int(11)">
+				<constraints nullable="false" primaryKey="true"/>
+			</column>
+			<column name="role" type="varchar(50)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<createTable tableName="user_property">
+			<column name="user_id" type="int(11)">
+				<constraints nullable="false" primaryKey="true"/>
+			</column>
+			<column name="property" type="varchar(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="property_value" type="varchar(255)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet id="manager.role-v1.00.01" author="Joe Alex Kimani">
+		<comment>Tables for Roles Added.</comment>
+		<createTable tableName="role">
+			<column name="role" type="varchar(50)">
+				<constraints nullable="false" primaryKey="true"/>
+			</column>
+			<column name="description" type="varchar(255)"/>
+		</createTable>
+		<createTable tableName="role_privilege">
+			<column name="role" type="varchar(50)">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="privilege" type="varchar(50)">
+				<constraints nullable="false" primaryKey="true"/>
+			</column>
+		</createTable>
+		<createTable tableName="role_role">
+			<column name="parent_role" type="varchar(50)">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="child_role" type="varchar(50)">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+		</createTable>
+	</changeSet>
 </databaseChangeLog>
