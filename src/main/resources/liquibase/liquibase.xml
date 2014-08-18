@@ -4,12 +4,460 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
 	<changeSet id="manager.person-v1.00.01" author="Joe Alex Kimani">
+		<comment>Added all person related tables.</comment>
 		<createTable tableName="person">
 			<column name="person_id" autoIncrement="true" type="int">
-				<constraints primaryKey="true"></constraints>
+				<constraints primaryKey="true"/>
 			</column>
-			<column name="person_name" type="varchar(75)"/>
+			<column name="gender" type="varchar(75)"/>
+			<column name="birthdate" type="date"/>
+			<column name="creator" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="date_created" type="datetime">
+				<constraints nullable="false"/>
+			</column>
+			<column name="changed_by" type="int(11)"/>
+			<column name="date_changed" type="datetime"/>
+			<column name="voided" type="tinyint(1)"/>
+			<column name="voided_by" type="int(11)"/>
+			<column name="date_voided" type="datetime"/>
+		</createTable>
+		<createTable tableName="person_address">
+			<column name="person_address_id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="person_id" type="int(11)"/>
+			<column name="address" type="varchar(255)"/>
+			<column name="city_village" type="varchar(255)"/>
+			<column name="state_province" type="varchar(255)"/>
+			<column name="county_district" type="varchar(255)"/>
+			<column name="postal_code" type="varchar(255)"/>
+			<column name="country" type="varchar(255)"/>
+			<column name="creator" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="date_created" type="datetime">
+				<constraints nullable="false"/>
+			</column>
+			<column name="voided" type="tinyint(1)"/>
+			<column name="voided_by" type="int(11)"/>
+			<column name="date_voided" type="datetime"/>
+			<column name="void_reason" type="varchar(255)"/>
+			<column name="changed_by" type="int(11)"/>
+			<column name="date_changed" type="datetime"/>
+		</createTable>
+		<createTable tableName="person_attribute_type">
+			<column name="person_attribute_type_id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="name" type="varchar(255)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="description" type="varchar(255)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="format" type="varchar(50)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="creator" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="date_created" type="datetime">
+				<constraints nullable="false"/>
+			</column>
+			<column name="changed_by" type="int(11)"/>
+			<column name="date_changed" type="datetime"/>
+			<column name="retired" type="tinyint(1)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="retired_by" type="int(11)"/>
+			<column name="date_retired" type="datetime"/>
+			<column name="retire_reason" type="varchar(255)"/>
+			<column name="edit_privilege" type="varchar(255)"/>
+		</createTable>
+		<createTable tableName="person_attribute">
+			<column name="person_attribute_id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="person_id" type="int">
+				<constraints nullable="false"/>
+			</column>
+			<column name="national_id" type="varchar(50)"/>
+			<column name="phone_number" type="varchar(50)"/>
+			<column name="person_attribute_type_id" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="creator" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="date_created" type="datetime">
+				<constraints nullable="false"/>
+			</column>
+			<column name="changed_by" type="int(11)"/>
+			<column name="date_changed" type="datetime"/>
+			<column name="voided" type="tinyint(1)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<createTable tableName="person_name">
+			<column name="person_name_id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="person_id" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="prefix" type="varchar(50)"/>
+			<column name="given_name" type="varchar(50)"/>
+			<column name="middle_name" type="varchar(50)"/>
+			<column name="family_name_prefix" type="varchar(50)"/>
+			<column name="family_name" type="varchar(50)"/>
+			<column name="family_name2" type="varchar(50)"/>
+			<column name="family_name_suffix" type="varchar(50)"/>
+			<column name="creator" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="date_created" type="datetime">
+				<constraints nullable="false"/>
+			</column>
+			<column name="changed_by" type="int(11)"/>
+			<column name="date_changed" type="datetime"/>
+		</createTable>
+		<!--<addForeignKeyConstraint baseTableName="person" baseColumnNames="person_" constraintName="" referencedTableName=""-->
+		                         <!--referencedColumnNames=""-->
+	</changeSet>
+	<changeSet id="manager.privilege-v1.00.01" author="Joe Alex Kimani">
+		<comment>Tables to handle privileges added.</comment>
+		<createTable tableName="privilege">
+			<column name="privilege" type="varchar(255)">
+				<constraints nullable="false" primaryKey="true"/>
+			</column>
+			<column name="description" type="varchar(255)">
+				<constraints nullable="false"/>
+			</column>
 		</createTable>
 	</changeSet>
-
+	<changeSet id="manager.user-v1.00.01" author="Joe Alex Kimani">
+		<comment>Tables for users and user roles</comment>
+		<createTable tableName="users">
+			<column name="user_id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="system_id" type="varchar(50)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="username" type="varchar(128)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="person_id" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="password" type="varchar(128)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="secret_question" type="varchar(255)"/>
+			<column name="secret_answer" type="varchar(255)"/>
+			<column name="creator" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="date_created" type="datetime">
+				<constraints nullable="false"/>
+			</column>
+			<column name="changed_by" type="int(11)"/>
+			<column name="date_changed" type="datetime"/>
+			<column name="retired" type="tinyint(1)"/>
+			<column name="date_retired" type="datetime"/>
+			<column name="retire_reason" type="varchar(255)"/>
+		</createTable>
+		<createTable tableName="user_role">
+			<column name="user_id" type="int(11)">
+				<constraints nullable="false" primaryKey="true"/>
+			</column>
+			<column name="role" type="varchar(50)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<createTable tableName="user_property">
+			<column name="user_id" type="int(11)">
+				<constraints nullable="false" primaryKey="true"/>
+			</column>
+			<column name="property" type="varchar(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="property_value" type="varchar(255)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet id="manager.role-v1.00.01" author="Joe Alex Kimani">
+		<comment>Tables for Roles Added.</comment>
+		<createTable tableName="role">
+			<column name="role" type="varchar(50)">
+				<constraints nullable="false" primaryKey="true"/>
+			</column>
+			<column name="description" type="varchar(255)"/>
+		</createTable>
+		<createTable tableName="role_privilege">
+			<column name="role" type="varchar(50)">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="privilege" type="varchar(50)">
+				<constraints nullable="false" primaryKey="true"/>
+			</column>
+		</createTable>
+		<createTable tableName="role_role">
+			<column name="parent_role" type="varchar(50)">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="child_role" type="varchar(50)">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet id="manager.student-v1.00.01" author="Joe Alex Kimani">
+		<comment>Adding student tables and guardian tables</comment>
+		<createTable tableName="student">
+			<column name="student_id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="registration_id" type="varchar(50)">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="person_id" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="student_guardian_id" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="enrollment_level_id" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="creator" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="date_created" type="datetime">
+				<constraints nullable="false"/>
+			</column>
+			<column name="retired" type="tinyint(1)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="date_retired" type="datetime"/>
+			<column name="retired_by" type="int(11)"/>
+		</createTable>
+		<createTable tableName="student_guardian">
+			<column name="student_guardian_id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="person_id" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="creator" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="date_created" type="datetime">
+				<constraints nullable="false"/>
+			</column>
+			<column name="retired" type="tinyint(1)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="date_retired" type="datetime"/>
+			<column name="retired_by" type="int(11)"/>
+		</createTable>
+	</changeSet>
+	<changeSet id="manager.grades-v1.00.01" author="Joe Alex Kimani">
+		<comment>Adding the subjects and institution levels</comment>
+		<createTable tableName="school_subject">
+			<column name="school_subject_id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="school_subject_code" type="varchar(50)">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="subject" type="varchar(50)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="description" type="varchar(255)"/>
+			<column name="school_grade_id" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="department_id" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<createTable tableName="school_grade">
+			<column name="school_grade_id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="school_grade" type="varchar(50)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="description" type="varchar(255)"/>
+		</createTable>
+		<createTable tableName="department">
+			<column name="department_id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="department_code" type="varchar(50)">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="department" type="varchar(255)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="description" type="varchar(255)"/>
+		</createTable>
+	</changeSet>
+	<changeSet id="manager.personnel-v1.00.01" author="Joe Alex Kimani">
+		<comment>Personnel tables created</comment>
+		<createTable tableName="personnel">
+			<column name="personnel_id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="person_id" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="department_id" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="personnel_level_id" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="personnel_type_id" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="creator" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="date_created" type="datetime">
+				<constraints nullable="false"/>
+			</column>
+			<column name="retired" type="tinyint(1)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="retired_by" type="int(11)"/>
+			<column name="retire_reason" type="varchar(255)"/>
+		</createTable>
+		<createTable tableName="personnel_type">
+			<column name="personnel_type_id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="personnel_type" type="varchar(50)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="description" type="varchar(255)"/>
+			<column name="payment_mode" type="varchar(50)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<createTable tableName="personnel_payment_mode">
+			<column name="personnel_payment_mode" type="varchar(50)">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="creator" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="date_created" type="datetime">
+				<constraints nullable="false"/>
+			</column>
+			<column name="changed_by" type="int(11)"/>
+			<column name="date_changed" type="datetime"/>
+		</createTable>
+		<createTable tableName="personnel_level">
+			<column name="personnel_level_id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="personnel_level" type="varchar(50)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="description" type="varchar(255)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="deduction_id" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="basic_salary" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="increment_factor" type="double">
+				<constraints nullable="false"/>
+			</column>
+			<column name="house_allowance" type="int(11)"/>
+			<column name="commuter_allowance" type="int(11)"/>
+			<column name="medical_allowance" type="int(11)"/>
+			<column name="creator" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="date_created" type="datetime">
+				<constraints nullable="false"/>
+			</column>
+			<column name="changed_by" type="int(11)"/>
+			<column name="date_changed" type="datetime"/>
+		</createTable>
+		<createTable tableName="personnel_deduction">
+			<column name="personnel_deduction_id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="deduction" type="varchar(50)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="description" type="varchar(255)"/>
+			<column name="deduction_factor" type="varchar(50)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="creator" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="date_created" type="datetime">
+				<constraints nullable="false"/>
+			</column>
+			<column name="changed_by" type="int(11)"/>
+			<column name="date_changed" type="datetime"/>
+		</createTable>
+	</changeSet>
+	<changeSet id="manager.accommodation-v1.00.01" author="Joe Alex Kimani">
+		<createTable tableName="hostel">
+			<column name="hostel_id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="hostel_code" type="varchar(50)">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="location_id" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<createTable tableName="hostel_attribute">
+			<column name="hostel_attribute_id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="hostel_code" type="varchar(50)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="hostel_name" type="varchar(128)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="hostel_rooms" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="hostel_room_type_id" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<createTable tableName="hostel_room_type">
+			<column name="hostel_room_type_id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="hostel_code" type="varchar(50)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="hostel_room_capacity" type="int(11)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+	</changeSet>
+	<!--<changeSet id="manager.academics-v1.00.01" author="Joe Alex Kimani">-->
+		<!--<comment>Institution academics are handled here</comment>-->
+		<!--<createTable tableName="">-->
+			<!--<column name=""></column>-->
+		<!--</createTable>-->
+	<!--</changeSet>-->
 </databaseChangeLog>
