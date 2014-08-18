@@ -1,24 +1,18 @@
 package org.kimani.manager;
 
-import org.hibernate.Session;
-import org.kimani.manager.mapping.Person;
-import org.kimani.manager.util.HibernateUtil;
+import org.apache.struts.action.ActionForm;
 
 /**
  * Created by alex on 8/15/14.
  */
-public class Display {
-	public static void main( String[] args )
-	{
-		System.out.println("Maven + Hibernate + MySQL");
-		Session session = HibernateUtil.getSessionFactory().openSession();
+public class Display extends ActionForm{
+	String message;
 
-		session.beginTransaction();
-		Person person = new Person();
+	public String getMessage() {
+		return message;
+	}
 
-		person.setPersonName("Joe Alex Kimani");
-
-		session.save(person);
-		session.getTransaction().commit();
+	public void setMessage(String message) {
+		this.message = message;
 	}
 }
