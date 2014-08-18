@@ -123,8 +123,8 @@
 			<column name="changed_by" type="int(11)"/>
 			<column name="date_changed" type="datetime"/>
 		</createTable>
-		<addForeignKeyConstraint baseTableName="person" baseColumnNames="person_" constraintName="" referencedTableName=""
-		                         referencedColumnNames=""
+		<!--<addForeignKeyConstraint baseTableName="person" baseColumnNames="person_" constraintName="" referencedTableName=""-->
+		                         <!--referencedColumnNames=""-->
 	</changeSet>
 	<changeSet id="manager.privilege-v1.00.01" author="Joe Alex Kimani">
 		<comment>Tables to handle privileges added.</comment>
