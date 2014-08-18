@@ -31,7 +31,7 @@
 			<img src="resources/images/main.png">
 		</td>
 		<td>
-			<h1>Car park Management Application</h1>
+			<h1>School Management Application</h1>
 		</td>
 	</tr>
 </table>
