@@ -463,10 +463,12 @@
 			</column>
 		</createTable>
 	</changeSet>
-	<!--<changeSet id="manager.academics-v1.00.01" author="Joe Alex Kimani">-->
-		<!--<comment>Institution academics are handled here</comment>-->
-		<!--<createTable tableName="">-->
-			<!--<column name=""></column>-->
-		<!--</createTable>-->
-	<!--</changeSet>-->
+	<changeSet id="manager.academics-v1.00.01" author="Joe Alex Kimani">
+		<comment>Institution academics are handled here</comment>
+		<createTable tableName="grading">
+			<column name="grading_id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+		</createTable>
+	</changeSet>
 </databaseChangeLog>
