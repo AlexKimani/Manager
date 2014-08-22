@@ -472,9 +472,9 @@
 			<column name="grade_name" type="varchar(50)">
 				<constraints nullable="false"/>
 			</column>
-			<column name="grade_range" type="varchar(50)">
-				<constraints nullable="false"/>
-			</column>
+			<!--<column name="grade_range" type="varchar(50)">-->
+				<!--<constraints nullable="false"/>-->
+			<!--</column>-->
 		</createTable>
 	</changeSet>
 </databaseChangeLog>
