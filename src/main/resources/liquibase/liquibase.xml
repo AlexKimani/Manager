@@ -469,10 +469,10 @@
 			<column name="grading_id" type="int" autoIncrement="true">
 				<constraints primaryKey="true"/>
 			</column>
-			<column name="grade" type="varchar(50)">
+			<column name="grade_name" type="varchar(50)">
 				<constraints nullable="false"/>
 			</column>
-			<column name="range" type="varchar(50)">
+			<column name="grade_range" type="varchar(50)">
 				<constraints nullable="false"/>
 			</column>
 		</createTable>
